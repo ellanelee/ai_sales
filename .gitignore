@@ -1,0 +1,49 @@
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+
+# Python / FastAPI Backend
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*$py.class
+
+# Python venv
+.venv/
+venv/
+env/
+
+# Pytest / coverage
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+.mypy_cache/
+
+# Packaging
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Environment Files
+.env
+.env.*
+*.env
+
+
+# Docker
+docker/postgres-data/
+docker/postgres-data/**
+
+# Docker runtime artifacts
+*.pid
+*.log
