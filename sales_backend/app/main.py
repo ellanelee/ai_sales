@@ -3,15 +3,13 @@ from contextlib import asynccontextmanager
 
 from app.core.config import settings
 from app.db.database import Base, engine
-from app.api import auth
+from app.api import auth, company, products
 
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     print("startup:Initializing database")
     Base.metadata.create_all(bind=engine)
-
     yield 
-
     print("Shutdown: cleaning up")
 
 app = FastAPI(
@@ -21,6 +19,8 @@ app = FastAPI(
 )
 
 app.include_router(auth.router, prefix="/auth")
+app.include_router(company.router, prefix="/company")
+app.include_router(products.router, prefix="/products")
 
 @app.get("/")
 def read_root():
@@ -36,4 +36,3 @@ def read_root():
 @app.get("/health")
 def health_check():
     return {"status":"OK"}
-
