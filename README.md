@@ -121,3 +121,6 @@ FastApi와 인공지능 모듈반영을 위한 연습용 레포지토리
    │ ├── config.py # 환경 변수/설정
    │ └── security.py # JWT, 암호화 등 인증 유틸
    └── requirements.txt%
+
+구현단계 : 
+DB설정 파일 - 모델 정의 - 라우터 - 스키마 - 서비스

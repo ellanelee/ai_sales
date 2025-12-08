@@ -1,0 +1,39 @@
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+
+from app.core.config import settings
+from app.db.database import Base, engine
+from app.api import auth
+
+@asynccontextmanager
+async def lifespan(app:FastAPI):
+    print("startup:Initializing database")
+    Base.metadata.create_all(bind=engine)
+
+    yield 
+
+    print("Shutdown: cleaning up")
+
+app = FastAPI(
+    title=settings.APP_NAME,
+    version=settings.APP_VERSION,
+    lifespan=lifespan,
+)
+
+app.include_router(auth.router, prefix="/auth")
+
+@app.get("/")
+def read_root():
+    return{"message":"Sales_AI is running now!"}    
+
+@app.get("/config-test")
+def read_root():
+    return {
+        "app_name": settings.APP_NAME , 
+        "db_url": settings.DATABASE_URL
+    }
+
+@app.get("/health")
+def health_check():
+    return {"status":"OK"}
+
