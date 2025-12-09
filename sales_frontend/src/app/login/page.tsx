@@ -1,7 +1,5 @@
-"use client"
-
-import { useState } from "react"
-import { apiClient } from "@/lib/api"
+import LoginForm from "@/components/loginForm";
 
 export default function LoginPage() {
+   return <LoginForm />
 }
