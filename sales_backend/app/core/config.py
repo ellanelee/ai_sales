@@ -9,7 +9,6 @@ class Settings(BaseSettings):
     APP_NAME: str = "AI Sales Backend"
     APP_VERSION: str = "0.1.0"
 
-
     DATABASE_URL: str = os.getenv(
         "DATABASE_URL", 
         "postgresql+psycopg2://sales:1234@localhost:5432/sales_db",

@@ -9,7 +9,7 @@ class ProductBase(BaseModel):
     target_industry: Optional[str] = None
 
 class ProductCreate(ProductBase):
-    company_id: int
+    pass
 
 class ProductOut(ProductBase):
     id: int
