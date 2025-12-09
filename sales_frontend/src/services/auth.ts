@@ -5,6 +5,7 @@ import {
   UserData,
 } from "@/types/types"
 import { apiClient } from "@/lib/api"
+import { useAuthStore } from "@/store/authStore"
 
 export async function signupApi(payload: SignupPayload): Promise<UserData> {
   const apiResponse = await apiClient<UserData>("/auth/signup", {
@@ -17,7 +18,7 @@ export async function signupApi(payload: SignupPayload): Promise<UserData> {
   return apiResponse.data
 }
 
-export async function loginApi(payload: LoginPayload) {
+export async function loginUser(payload: LoginPayload) {
   const apiResponse = await apiClient<LoginResponseData>("/auth/login", {
     method: "POST",
     body: JSON.stringify(payload),
@@ -25,8 +26,7 @@ export async function loginApi(payload: LoginPayload) {
   if (!apiResponse.success || !apiResponse.data) {
     throw new Error(apiResponse.error || "로그인에 실패했습니다")
   }
-  if(typeof window != "undefined" && apiResponse.success) {
-    localStorage.setItem('access_token', apiResponse.data.access_token)
-  }
+  const { access_token, user } = apiResponse.data
+  useAuthStore.getState().login(user, access_token)
   return apiResponse.data
 }

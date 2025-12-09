@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { loginApi } from "@/services/auth"
+import { loginUser } from "@/services/auth"
 import { useRouter } from "next/navigation"
 
 const LoginForm = () => {
@@ -34,7 +34,7 @@ const LoginForm = () => {
         throw new Error("이메일, 비밀번호는 필수 입력 항목입니다")
       }
       // loginApi함수 호출
-      const loginData = await loginApi({
+      const loginData = await loginUser({
         email: formData.email,
         password: formData.password,
       })
