@@ -6,6 +6,7 @@ from app.db.models import User, Company
 from app.schemas.auth import UserCreate, UserOut, LoginRequest, LoginResponse
 from app.schemas.common import ApiResponse
 from app.core.security import hash_password, verify_password, create_access_token
+from app.core.deps import get_current_user
 
 router = APIRouter(
     tags=["auth"]
@@ -90,4 +91,13 @@ def login(payload: LoginRequest, db:Session= Depends(get_db) ):
         data = token_response, 
         error=None, 
         meta=None
+    )
+
+@router.get("/me", response_model=ApiResponse)
+def get_me(current_user: User = Depends(get_current_user)):
+    return ApiResponse(
+        success=True,
+        data=UserOut.model_validate(current_user),
+        error = None, 
+        meta = None, 
     )
