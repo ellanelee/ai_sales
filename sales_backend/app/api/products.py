@@ -4,7 +4,7 @@ from typing import Optional
 
 from app.db.database import get_db
 from app.db.models import User, Product, Company
-from app.schemas.products import ProductCreate, ProductOut 
+from app.schemas.products import ProductCreate, ProductOut, ProductListQuery
 from app.schemas.common import ApiResponse
 from app.core.deps import get_current_user
 
@@ -15,15 +15,23 @@ router = APIRouter(
 #제품 조회 
 @router.get("/", response_model = ApiResponse)
 def list_products(
+    q : ProductListQuery = Depends(), 
     current_user: User = Depends(get_current_user),
     db:Session = Depends(get_db)
 ):
-    products = db.query(Product).filter(Product.company_id == current_user.company_id)
+    query = db.query(Product).filter(Product.company_id == current_user.company_id)
+    total_count = query.count()
+    products = query.offset(q.offset).limit(q.limit).all()
+
     return ApiResponse(
         success=True,
         data = [ProductOut.model_validate(p)for p in products],
         error=None, 
-        meta=None, 
+        meta={
+            "total": total_count,
+            "limit": q.limit, 
+            "offset": q.offset
+        }, 
     )   
 
 @router.post("/", response_model=ApiResponse, status_code=status.HTTP_201_CREATED)

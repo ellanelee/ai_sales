@@ -1,6 +1,5 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
-from pydantic import ConfigDict
 
 class ProductBase(BaseModel):
     name: str
@@ -15,3 +14,7 @@ class ProductOut(ProductBase):
     id: int
     company_id: int 
     model_config=ConfigDict(from_attributes=True)
+
+class ProductListQuery(BaseModel):
+    limit: int = 10
+    offset: int = 0 
