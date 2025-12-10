@@ -47,3 +47,5 @@ docker/postgres-data/**
 # Docker runtime artifacts
 *.pid
 *.log
+
+#frontend 

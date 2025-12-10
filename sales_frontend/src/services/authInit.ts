@@ -1,0 +1,22 @@
+"use client"
+
+import { useAuthStore } from "@/store/authStore"
+import { fetchCurrentUser } from "@/services/auth"
+
+export async function authInitWithToken() {
+  const { login, logout } = useAuthStore.getState()
+
+  if (typeof window == "undefined") return
+  const token = localStorage.getItem("access_token")
+  try {
+    if (!token) {
+      logout()
+      return
+    }
+    const userInfo = await fetchCurrentUser()
+    login(userInfo, token)
+  } catch(e) {
+    console.log("Auth동기화가 실패했습니다.")
+    logout()
+  } 
+}
