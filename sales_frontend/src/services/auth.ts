@@ -30,3 +30,13 @@ export async function loginUser(payload: LoginPayload) {
   useAuthStore.getState().login(user, access_token)
   return apiResponse.data
 }
+
+export async function fetchCurrentUser(): Promise<UserData> {
+   const apiResponse = await apiClient<UserData>('/auth/me', {
+    method: "GET",
+   })
+   if(!apiResponse.success || !apiResponse.data){
+    throw new Error(apiResponse.error || "사용자 정보를 가져올수 없습니다")
+   }
+   return apiResponse.data; 
+}
