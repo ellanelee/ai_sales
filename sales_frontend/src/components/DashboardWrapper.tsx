@@ -6,16 +6,18 @@ import { useEffect, useState } from "react"
 
 export function DashboardWrapper({ children }: { children: React.ReactNode }) {
   const router = useRouter()
-  const { isLoggedIn, user } = useAuthStore()
+  const { isLoggedIn, isInitialized } = useAuthStore()
   const [isChecking, setIsChecking] = useState(true)
 
   //AuthInitialzier구동 후 로그인 상태인지 확인하여 리다이렉트
   useEffect(() => {
     setIsChecking(false)
-    if (isLoggedIn === false) {
-      router.replace("/login")
+    if (isInitialized) {
+      if (isLoggedIn === false) {
+        router.push("/login")
+      }
     }
-  }, [isLoggedIn, router])
+  }, [isLoggedIn, isInitialized, router])
 
   if (isChecking) {
     return (
