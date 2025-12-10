@@ -27,11 +27,12 @@ export const Header = () => {
           </>
         ) : (
           <>
-            <Link
-              href="/login"
-              className="text-gray-700 hover:text-blue-600 transition"
-            ></Link>
-            <LoginButton />
+          <Link
+            href="/login"
+            className="text-gray-700 hover:text-blue-600 transition"
+          >
+          </Link>
+          <LoginButton />
           </>
         )}
       </nav>

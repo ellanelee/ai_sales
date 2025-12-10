@@ -1,15 +1,8 @@
 import { create } from "zustand"
-import { UserData } from "@/types/types"
+import { CompanyData, UserData, AuthState } from "@/types/types"
 import { persist, createJSONStorage } from "zustand/middleware"
 
-interface AuthState {
-  isLoggedIn: boolean
-  user: UserData | null
-  isInitialized: boolean 
-  login: (userData: UserData, token: string) => void
-  logout: () => void
-  setInitialized: (initialized: boolean) => void 
-}
+
 
 //스토어 생성 (persist middleware)
 export const useAuthStore = create<AuthState>()(
@@ -18,7 +11,8 @@ export const useAuthStore = create<AuthState>()(
     (set) => ({
       isLoggedIn: false,
       user: null,
-      isInitialized: false, 
+      company: null,
+      isInitialized: false,
       login: (userData, token) => {
         set({ isLoggedIn: true, user: userData })
         //persist가 토큰을 localStorage에 직접저장
@@ -33,9 +27,11 @@ export const useAuthStore = create<AuthState>()(
           localStorage.removeItem("auth_storage")
         }
       },
-      setInitialized: (initialized ) => {
-        set({ isInitialized : initialized})
-      }
+      setInitialized: (initialized) => {
+        set({ isInitialized: initialized })
+      },
+      setCompany: (companyData: CompanyData | null) =>
+        set({ company: companyData }),
     }),
     //로컬 스토리지 저장
     {

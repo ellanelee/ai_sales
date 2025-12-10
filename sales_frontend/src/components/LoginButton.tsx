@@ -17,7 +17,7 @@ const LoginButton: React.FC = () => {
       variant="primary"
       type="button"
     >
-      LOG OUT{" "}
+      LOG IN{" "}
     </Button>
   )
 }

@@ -6,7 +6,7 @@ import { CompanyData } from "@/types/types"
 import { fetchMyCompany } from "@/services/company"
 
 export default function MyPage() {
-  const { user } = useAuthStore()
+  const { user, company } = useAuthStore()
   const [preview, setPreview] = useState<string | null>(null)
   const [companyInfo, setCompanyInfo] = useState<
     CompanyData | null | undefined
@@ -18,19 +18,19 @@ export default function MyPage() {
   }
 
   //컴퍼넌트 마운트시에 회사 정보 fetch
-  useEffect(() => {
-    const loadCompanyInfo = async () => {
-      try {
-        const company = await fetchMyCompany()
-        setCompanyInfo(company)
-        console.log(companyInfo)
-      } catch (error) {
-        console.error("회사 정보 불러오기 실패")
-        setCompanyInfo(null)
-      }
-    }
-    loadCompanyInfo()
-  }, [])
+  // useEffect(() => {
+  //   const loadCompanyInfo = async () => {
+  //     try {
+  //       const company = await fetchMyCompany()
+  //       setCompanyInfo(company)
+  //       console.log(companyInfo)
+  //     } catch (error) {
+  //       console.error("회사 정보 불러오기 실패")
+  //       setCompanyInfo(null)
+  //     }
+  //   }
+  //   loadCompanyInfo()
+  // }, [])
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
@@ -38,7 +38,7 @@ export default function MyPage() {
     const url = URL.createObjectURL(file)
     setPreview(url)
   }
-  const companyName = companyInfo?.name || "소속된 회사가 없습니다."
+  // const companyName = companyInfo?.name || "소속된 회사가 없습니다."
 
   return (
     <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
@@ -76,7 +76,7 @@ export default function MyPage() {
 
         <div>
           <p className="text-gray-600 text-sm">소속 회사</p>
-          <p className="text-lg font-medium">{companyName}</p>
+          <p className="text-lg font-medium">{company?.name}</p>
         </div>
       </div>
     </div>

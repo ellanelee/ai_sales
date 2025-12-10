@@ -2,9 +2,9 @@
 import Link from "next/link"
 import { useAuthStore } from "@/store/authStore"
 import { DashboardWrapper } from "@/components/DashboardWrapper"
-import { Header } from "@/components/Header"
+
 export default function Home() {
-  const { user } = useAuthStore()
+  const { user, company } = useAuthStore()
   return (
     <DashboardWrapper>
       <div>
@@ -27,10 +27,8 @@ export default function Home() {
               </div>
 
               <div className="bg-white rounded-xl shadow p-4">
-                <p className="text-sm text-gray-500 mb-1">소속 회사 ID</p>
-                <p className="text-base font-medium">
-                  {user?.company_id ?? "-"}
-                </p>
+                <p className="text-sm text-gray-500 mb-1">소속 회사</p>
+                <p className="text-base font-medium">{company?.name ?? "-"}</p>
                 <p className="text-xs text-gray-400 mt-1">
                   회사 상세 정보는 추후 /company 연동 예정
                 </p>

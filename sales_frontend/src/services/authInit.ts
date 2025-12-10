@@ -2,6 +2,7 @@
 
 import { useAuthStore } from "@/store/authStore"
 import { fetchCurrentUser } from "@/services/auth"
+import { fetchAndStoreCompanyData } from "./company"
 
 export async function authInitWithToken() {
   const { login, logout, setInitialized } = useAuthStore.getState()
@@ -14,7 +15,9 @@ export async function authInitWithToken() {
       return
     }
     const userInfo = await fetchCurrentUser()
+    await fetchAndStoreCompanyData(); 
     login(userInfo, token)
+    
   } catch (e) {
     console.log("Auth동기화가 실패했습니다.")
     logout()

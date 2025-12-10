@@ -1,5 +1,6 @@
 import { CompanyData } from "@/types/types";
 import { apiClient } from "@/lib/api";
+import { useAuthStore } from "@/store/authStore";
 
 export async function fetchMyCompany(): Promise<CompanyData | null >{
    const apiResponse = await apiClient<CompanyData>('/company/me',
@@ -14,4 +15,11 @@ export async function fetchMyCompany(): Promise<CompanyData | null >{
    }
 
    return apiResponse. data;  
+}
+
+export async function fetchAndStoreCompanyData(){
+   const { setCompany } = useAuthStore.getState();
+   const companyData = await fetchMyCompany(); 
+
+   setCompany(companyData); 
 }
