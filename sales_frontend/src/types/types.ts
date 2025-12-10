@@ -20,3 +20,10 @@ export interface LoginResponseData {
   token_type: string //bearer
   user: UserData
 }
+
+export interface CompanyData {
+  id: number
+  name: string
+  industry: string | null
+  description: string | null
+}

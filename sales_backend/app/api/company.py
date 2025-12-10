@@ -5,23 +5,23 @@ from app.db.database import get_db
 from app.db.models import User, Company
 from app.schemas.company import CompanyOut, CompanyUpdate
 from app.schemas.common import ApiResponse
+from app.core.deps import get_current_user
 
 router = APIRouter(
     tags=["company"]
 )
 
-FAKE_CURRENT_USER_ID = 1
-
 @router.get("/me", response_model=ApiResponse)
-def get_my_company(db:Session = Depends(get_db)):
-    user = db.query(User).filter(U.id == FAKE_CURRENT_USER_ID).first()
-    if not user:
+def get_my_company(    
+    current_user : User = Depends(get_current_user),
+    db:Session = Depends(get_db)):
+    if not current_user:
         raise HTTPException(
             status_code = status.HTTP_404_NOT_FOUND,
             details="사용자를 찾을수 없습니다"
         )
     
-    company = user.company
+    company = current_user.company
     if not company:
         return ApiResponse(
             success=True, 
@@ -32,7 +32,7 @@ def get_my_company(db:Session = Depends(get_db)):
     
     company_out = CompanyOut.model_validate(company)
     return ApiResponse(
-                 success=True, 
+            success=True, 
             data=company_out, 
             error=None, 
             meta=None
@@ -41,14 +41,14 @@ def get_my_company(db:Session = Depends(get_db)):
 def update_my_company(
     payload: CompanyUpdate,
     db:Session = Depends(get_db),
+    current_user : User = Depends(get_current_user),
 ):
-    user=db.query(User).filter(User.id == FAKE_CURRENT_USER_ID).first()
-    if not user:
+    if not current_user:
         raise HTTPException(
             status_code = status.HTTP_404_NOT_FOUND,
             detail="사용자를 찾을수 없습니다."
         )
-    company = user.company
+    company = current_user.company
 
     if company is None:
         company = Company(
@@ -58,7 +58,7 @@ def update_my_company(
         )
         db.add(company)
         db.flush()
-        user.company = company
+        current_user.company = company
     else: 
         company.name = payload.name
         company.industry = payload.industry

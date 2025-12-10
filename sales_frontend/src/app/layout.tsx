@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import "./globals.css"
 import { AuthInitializer } from "@/components/AuthInitizlizer"
+import { Header } from "@/components/Header"
 
 export const metadata: Metadata = {
   title: "ai_sales_dashboard",
@@ -16,7 +17,8 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <AuthInitializer />
-        {children}
+        <Header />
+        <main>{children}</main>
       </body>
     </html>
   )

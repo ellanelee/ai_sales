@@ -4,20 +4,17 @@ import { useRouter } from "next/navigation"
 import { useAuthStore } from "@/store/authStore"
 import Button from "@/utils/Button"
 
-const LogoutButton: React.FC = () => {
+const LoginButton: React.FC = () => {
   const router = useRouter()
-  const logout = useAuthStore((state) => state.logout)
 
   const handleLogout = () => {
-    logout()
     router.push("/login")
   }
 
   return (
     <Button
-      onClick={handleLogout}
       className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-      variant="danger"
+      variant="primary"
       type="button"
     >
       LOG OUT{" "}
@@ -25,4 +22,4 @@ const LogoutButton: React.FC = () => {
   )
 }
 
-export default LogoutButton
+export default LoginButton
