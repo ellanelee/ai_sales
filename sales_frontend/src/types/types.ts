@@ -27,3 +27,28 @@ export interface CompanyData {
   industry: string | null
   description: string | null
 }
+
+export interface AuthState {
+  isLoggedIn: boolean
+  user: UserData | null
+  company: CompanyData | null
+  isInitialized: boolean
+  login: (userData: UserData, token: string) => void
+  logout: () => void
+  setInitialized: (initialized: boolean) => void
+  setCompany: (companyData: CompanyData | null) => void
+}
+
+export interface Lead {
+  id: number
+  company: string
+  industry: string
+  score: number
+  reason: string
+  size: string
+}
+
+export interface LeadFilter {
+  industry: string
+  minScore: number
+}
