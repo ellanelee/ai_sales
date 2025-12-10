@@ -30,7 +30,7 @@ const LoginForm = () => {
 
     try {
       // 필수필드 입력확인
-      if (!formData.email || !formData.password ) {
+      if (!formData.email || !formData.password) {
         throw new Error("이메일, 비밀번호는 필수 입력 항목입니다")
       }
       // loginApi함수 호출
@@ -53,47 +53,79 @@ const LoginForm = () => {
     }
   }
   return (
-   <div style={{ maxWidth: '400px', margin: '50px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '5px' }}>
-      <h2>로그인</h2>
-      
-      <form onSubmit={handleSubmit}>
+    <div className="max-w-md mx-auto mt-20 p-8 bg-white shadow-md rounded-xl border border-gray-200">
+      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+        로그인
+      </h2>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
         {/* 이메일 */}
-        <label htmlFor="email">이메일:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          disabled={isLoading}
-          required
-        />
-        <br />
+        <div>
+          <label
+            htmlFor="email"
+            className="block text-lg font-medium text-gray-700 mb-1"
+          >
+            이메일
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            disabled={isLoading}
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 
+                       focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+                       text-gray-800 shadow-sm"
+          />
+        </div>
 
         {/* 비밀번호 */}
-        <label htmlFor="password">비밀번호:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          disabled={isLoading}
-          required
-        />
-        <br />
+        <div>
+          <label
+            htmlFor="password"
+            className="block text-lg font-medium text-gray-700 mb-1"
+          >
+            비밀번호
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            disabled={isLoading}
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full px-4 py-3 rounded-lg border border-gray-300 
+                       focus:ring-2 focus:ring-blue-500 focus:border-blue-500 
+                       text-gray-800 shadow-sm"
+          />
+        </div>
 
         {/* 상태 메시지 */}
-        {error && <p style={{ color: 'red' }}>오류: {error}</p>}
-        {success && <p style={{ color: 'green' }}>로그인 성공! 홈 페이지로 이동합니다...</p>}
+        {error && (
+          <p className="text-red-500 text-center font-medium">{error}</p>
+        )}
+        {success && (
+          <p className="text-green-600 text-center font-medium">
+            로그인 성공! 이동 중...
+          </p>
+        )}
 
         {/* 버튼 */}
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? '처리 중...' : '로그인하기'}
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 
+                     rounded-lg text-lg font-semibold shadow-md 
+                     transition-all disabled:bg-gray-400"
+        >
+          {isLoading ? "처리 중..." : "로그인하기"}
         </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default LoginForm 
+export default LoginForm
