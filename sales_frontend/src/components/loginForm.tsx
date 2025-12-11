@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { loginUser } from "@/services/auth"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 
 const LoginForm = () => {
   const router = useRouter()
@@ -123,6 +124,12 @@ const LoginForm = () => {
         >
           {isLoading ? "처리 중..." : "로그인하기"}
         </button>
+        <Link
+          href="/signup"
+          className="mt-3 px-4 py-2 text-red-600 text-sm font-medium transition hover:bg-indigo-100 flex justify-center"
+        >
+          아직 회원이 아니신가요? 회원가입으로
+        </Link>
       </form>
     </div>
   )
