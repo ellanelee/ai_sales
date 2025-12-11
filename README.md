@@ -2,7 +2,7 @@ FastApi와 인공지능 모듈반영을 위한 연습용 레포지토리
 
 1.기본 기능
 
-- 공통 레이아웃 & 네비
+- FastAPI (Backend), NextJS(Frontend), SQLAlchemy(ORM)
 - 로그인/로그아웃 + 인증 (JWT Token)
 - 회사/제품 정보 설정
 - 리드 리스트
@@ -39,12 +39,11 @@ FastApi와 인공지능 모듈반영을 위한 연습용 레포지토리
    }
 
 4. DB 구조
-
 - users(id, email, password, name, company_id)
 - companies (id, name, industry, description, website)
 - products ( id, company_id, name, product_category, description, target_industry)
-- deals (id, seller_id, buyer_id, product_id, status, sales_revenue, desription)
-
+- leads(id, seller_id, buyer_id, product_id, status, sales_revenue, desription) #잠재고객사
+- deals(id, company, industry, score: number, reason,size)#거래 deal
 5. 프론트엔드
    sales-frontend/
    ├── app/ # Next.js App Router 엔트리
@@ -71,7 +70,6 @@ FastApi와 인공지능 모듈반영을 위한 연습용 레포지토리
    │ │ └── page.tsx # 제품 상세/수정
    │ └── mypage/
    │ └── page.tsx # 개인정보
-   │
    ├── components/
    │ ├── AuthInitizlizer.tsx
    │ ├── DashboardWrapper.tsx

@@ -3,7 +3,6 @@ import { useAuthStore } from "@/store/authStore"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { CompanyData } from "@/types/types"
-import { fetchMyCompany } from "@/services/company"
 
 export default function MyPage() {
   const { user, company } = useAuthStore()
@@ -16,21 +15,6 @@ export default function MyPage() {
   if (!user) {
     return <p className="p-6 text-gray-600">로그인 정보가 없습니다.</p>
   }
-
-  //컴퍼넌트 마운트시에 회사 정보 fetch
-  // useEffect(() => {
-  //   const loadCompanyInfo = async () => {
-  //     try {
-  //       const company = await fetchMyCompany()
-  //       setCompanyInfo(company)
-  //       console.log(companyInfo)
-  //     } catch (error) {
-  //       console.error("회사 정보 불러오기 실패")
-  //       setCompanyInfo(null)
-  //     }
-  //   }
-  //   loadCompanyInfo()
-  // }, [])
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
