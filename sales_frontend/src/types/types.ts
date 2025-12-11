@@ -52,3 +52,19 @@ export interface LeadFilter {
   industry: string
   minScore: number
 }
+
+export type DealStage =
+  | "new"
+  | "qualification"
+  | "proposal"
+  | "negotiation"
+  | "closed"
+
+export interface Deal {
+  id: number
+  leadCompany: string
+  productName: string
+  stage: DealStage
+  amount: number
+  expectedClose: string
+}

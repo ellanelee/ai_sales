@@ -73,7 +73,7 @@ FastApi와 인공지능 모듈반영을 위한 연습용 레포지토리
    │ ├── layout/
    │ │ ├── AppShell.tsx # 상단/사이드 네비 포함 공통 레이아웃
    │ │ └── NavLink.tsx # 네비게이션 링크 컴포넌트
-   │ ├── ui/ # 공통 UI 컴포넌트(Button, Card 등)
+   │ ├── utils/ # 공통 UI 컴포넌트(Button, Card 등)
    │ │ ├── Button.tsx
    │ │ ├── Card.tsx
    │ │ └── Table.tsx

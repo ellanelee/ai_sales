@@ -105,7 +105,7 @@ export default function Home() {
                   </p>
                 </div>
                 <Link
-                  href="/pipeline"
+                  href="/deals"
                   className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-amber-500 text-white text-sm font-medium hover:bg-amber-600 transition"
                 >
                   파이프라인 관리
