@@ -204,7 +204,22 @@ export default function Home() {
                 마이페이지로 이동
               </Link>
             </div>
-
+            {/* Agent_Log*/}
+            <div className="bg-white rounded-xl shadow p-5 flex flex-col justify-between">
+              <div>
+                <h3 className="text-xl font-semibold mb-2">리드 추천 리스트</h3>
+                <p className="text-gray-600 text-sm mb-4">
+                  Mock 데이터 기반으로 산업/점수 기준 필터링이 가능한 리드
+                  리스트입니다.
+                </p>
+              </div>
+              <Link
+                href="/agent_log"
+                className="inline-flex items-center justify-center mt-3 px-4 py-2 rounded-lg bg-indigo-500 text-white text-sm font-medium hover:bg-indigo-600 transition"
+              >
+                Agent 대화 로그 보기
+              </Link>
+            </div>
             {/* 향후 확장 영역 */}
             <div className="bg-gradient-to-br from-indigo-50 to-emerald-50 rounded-xl shadow p-5 flex flex-col justify-between">
               <div>

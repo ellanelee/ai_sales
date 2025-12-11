@@ -93,6 +93,13 @@ export interface ProductCreatePayload {
   target_industry?: string | null
 }
 
+export type AgentRole = "seller_agent" | "buyer_agent" | "system"
 
-export type AgentRole = "seller-agent" | "buyer-agent" | "system"
+export interface AgentMessage {
+  id: number
+  role: AgentRole
+  content: string
+  createdAt: string
+}
 
+export type AgentDecision = "none" | "approved" | "rejected"
