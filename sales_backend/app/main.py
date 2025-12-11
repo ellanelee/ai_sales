@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+import os 
 
 from app.core.config import settings
 from app.db.database import Base, engine
@@ -19,11 +21,11 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+load_dotenv()
+
 # CORS 
-origins = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-]
+cors_origins : str = os.getenv("CORS_ORIGIN", "")
+origins = [cors_origins]
 
 app.add_middleware(
     CORSMiddleware, 
