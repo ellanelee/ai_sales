@@ -68,3 +68,31 @@ export interface Deal {
   amount: number
   expectedClose: string
 }
+
+export interface DashboardStats {
+  totalLeads: number
+  hotLeads: number
+  inProgressDeals: number
+  closingSoonDeals: number
+  productCount: number
+}
+
+export interface Product {
+  id: number
+  company_id: number
+  name: string
+  product_category?: string | null
+  description?: string | null
+  target_industry: string | null
+}
+
+export interface ProductCreatePayload {
+  name: string
+  product_category?: string | null
+  description?: string
+  target_industry?: string | null
+}
+
+
+export type AgentRole = "seller-agent" | "buyer-agent" | "system"
+
