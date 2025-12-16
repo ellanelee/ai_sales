@@ -2,8 +2,6 @@ import { create } from "zustand"
 import { CompanyData, UserData, AuthState } from "@/types/types"
 import { persist, createJSONStorage } from "zustand/middleware"
 
-
-
 //스토어 생성 (persist middleware)
 export const useAuthStore = create<AuthState>()(
   persist(
@@ -21,7 +19,7 @@ export const useAuthStore = create<AuthState>()(
         }
       },
       logout: () => {
-        set({ isLoggedIn: false, user: null })
+        set({ isLoggedIn: false, user: null, company: null })
         if (typeof window != "undefined") {
           localStorage.removeItem("access_token")
           localStorage.removeItem("auth_storage")
