@@ -1,16 +1,20 @@
 import { create } from "zustand"
-import { CompanyData, UserData, AuthState } from "@/types/types"
+import { CompanyData, AuthState } from "@/types/types"
 import { persist, createJSONStorage } from "zustand/middleware"
 
+//초기값 설정
+const initialState = {
+  isLoggedIn: false,
+  user: null,
+  company: null,
+  isInitialized: false,
+}
 //스토어 생성 (persist middleware)
 export const useAuthStore = create<AuthState>()(
   persist(
     //authstate store저장
     (set) => ({
-      isLoggedIn: false,
-      user: null,
-      company: null,
-      isInitialized: false,
+      ...initialState,
       login: (userData, token) => {
         set({ isLoggedIn: true, user: userData })
         //persist가 토큰을 localStorage에 직접저장
