@@ -3,14 +3,25 @@ import { useAuthStore } from "@/store/authStore"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { CompanyData } from "@/types/types"
+import { fetchAndStoreCompanyData } from "@/services/company"
 
 export default function MyPage() {
-  const { user, company } = useAuthStore()
+  const { user, company, isLoggedIn } = useAuthStore()
   const [preview, setPreview] = useState<string | null>(null)
   const [companyInfo, setCompanyInfo] = useState<
     CompanyData | null | undefined
   >(null)
+  const [isLoading, setIsLoading] = useState(false)
 
+  useEffect(() => {
+    if (isLoggedIn && user && !company) {
+      setIsLoading(true)
+      fetchAndStoreCompanyData().finally(() => {
+        setIsLoading(false)
+      })
+    }
+  }, [isLoggedIn, user, company])
+  if (isLoading) return <div>회사 정보를 불러오는 중...</div>
   //store에 로그인 정보 설정에 문제가 있는 경우
   if (!user) {
     return <p className="p-6 text-gray-600">로그인 정보가 없습니다.</p>
